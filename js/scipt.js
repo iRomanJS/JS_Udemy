@@ -1,18 +1,22 @@
 "use strict";
 
-console.log('arr' + " - object");
-console.log(4 + "5");
+let num = 50;
 
-let incr = 10,
-    decr = 10;
+// while (num <= 55) {
+//     console.log(num);
+//     num++;
+// }
 
-// ++incr;
-// --decr;
+// do {
+//     console.log(num);
+//     num++;
+// }
+// while (num < 55);
 
-console.log(++incr);
-console.log(--decr);
-
-console.log(5%2);
-
-
-console.log(2*4 == 8);
+for (let i = 1; i < 10; i++) {
+    if (i === 6) {
+        // break;
+        continue;
+    }
+    console.log(i);
+}
