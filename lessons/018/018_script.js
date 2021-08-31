@@ -31,7 +31,7 @@ const personalMovieDB = {
     actors: {},
     genres: [],
     privat: false
-}
+};
 
 function showMyDB() {
     if (personalMovieDB.privat == false) {
