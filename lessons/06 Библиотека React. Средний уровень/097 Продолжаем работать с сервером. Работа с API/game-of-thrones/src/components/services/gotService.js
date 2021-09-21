@@ -13,34 +13,34 @@ export default class GotService {
     };
 
     async getAllCharacters() {
-        const res = await this.getResource(`/characters?page=5`);
-        return res.map(this._transformCharacter)
+        const res = await this.getResource(`/characters?page=5&pageSize10`);
+        return res.map(this._transformCharacter.bind(this));
     }
 
     async getCharacter(id) {
         const character = await this.getResource(`/characters/${id}`);
-        return this._transformCharacter(character)
+        return this._transformCharacter(character);
     }
 
     async getAllBooks() {
         const res = await this.getResource('/books/');
-        return res.map(this._transformBook)
+        return res.map(this._transformBook.bind(this));
     }
 
     async getBook(id) {
         const book = await this.getResource(`/books/${id}/`);
-        return this._transformBook(book)
+        return this._transformBook(book);
 
     }
 
     async getAllHouses() {
         const res = await this.getResource('/houses/');
-        return res.map(this._transformHouse)
+        return res.map(this._transformHouse.bind(this));
     }
 
     async getHouse(id) {
         const house = await this.getResource(`/houses/${id}/`);
-        return this._transformHouse(house)
+        return this._transformHouse(house);
 
     }
 
