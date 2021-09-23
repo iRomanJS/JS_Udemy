@@ -1,11 +1,22 @@
 import React, {Component} from 'react';
 import './itemList.css';
 import Spinner from '../spinner';
+import PropTypes from 'prop-types';
 
 export default class ItemList extends Component {
     
     state = {
         itemList: null
+    }
+
+    static defaultProps = {
+        onItemSelected: () => {}
+    
+    }
+    
+    static propTypes = {
+        onItemSelected: PropTypes.func,
+        getData: PropTypes.arrayOf(PropTypes.object)
     }
 
     componentDidMount() {
@@ -51,3 +62,13 @@ export default class ItemList extends Component {
         );
     }
 }
+
+// ItemList.defaultProps = {
+//     onItemSelected: () => {}
+
+// }
+
+// ItemList.propTypes = {
+//     onItemSelected: PropTypes.func,
+//     getData: PropTypes.arrayOf(PropTypes.object)
+// }
