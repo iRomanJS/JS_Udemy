@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import WithRestoService from '../hoc/';
 import Spinner from '../spinner';
+import Error from '../error';
 import {menuLoaded, menuRequested, menuError, addedToCart} from '../../actions';
 
 import './itemPage.css';
@@ -21,15 +22,24 @@ class ItemPage extends Component {
     }
 
     render() {
-        if(this.props.loading) {
+        const {loading, error, menuItems} = this.props;
+        if (error) {
+            return(
+                <div className="item_page">
+                    <Error/>
+                </div>
+            )
+        }
+        
+        if (loading) {
             return (
                 <div className = "item_page">
                     <Spinner/>
                 </div>
             )
         }
-        const item = this.props.menuItems.find((el) => +el.id === +this.props.match.params.id);
-        const {title, url, category, price} = item;
+        const item = menuItems.find((el) => +el.id === +this.props.match.params.id);
+        const {title, url, category, price, id} = item;
 
         return (
             <div className = "item_page">
@@ -38,7 +48,7 @@ class ItemPage extends Component {
                     <img className="menu__img" src={url} alt={title}></img>
                     <div className="menu__category">Category: <span>{category}</span></div>
                     <div className="menu__price">Price: <span>{price}$</span></div>
-                    <button onClick={() => addedToCart()} className="menu__btn">Add to cart</button>
+                    <button onClick={() => addedToCart(id)} className="menu__btn">Add to cart</button>
                     <span className = {`menu__category_Img ${category}`}></span> 
                 </div>
             </div>
@@ -57,7 +67,8 @@ const mapStateToProps =  (state) =>{
 const mapDispatchToProps = {
     menuLoaded: menuLoaded,
     menuRequested,
-    menuError
+    menuError,
+    addedToCart
 }
 
 export default WithRestoService ()( connect(mapStateToProps, mapDispatchToProps)(ItemPage) );
